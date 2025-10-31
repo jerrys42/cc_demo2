@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schnappsen - LeitnerLeitner Edition</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <!-- Header -->
+        <header>
+            <h1>🎴 Schnappsen 🎴</h1>
+            <p class="subtitle">Die LeitnerLeitner Edition</p>
+        </header>
+
+        <!-- Spielinfo -->
+        <div class="game-info">
+            <div class="player-info computer">
+                <h3>🤖 Computer</h3>
+                <div class="score-display">
+                    <span class="score" id="computer-score">0</span>
+                    <span class="label">Punkte</span>
+                </div>
+                <div class="game-points">
+                    <span id="computer-game-points">0</span> Spielpunkte
+                </div>
+            </div>
+
+            <div class="trump-info">
+                <div class="talon-counter">
+                    <span id="talon-count">10</span> Karten
+                </div>
+                <div class="trump-card" id="trump-card-display">
+                    <span class="card-placeholder">Trumpf</span>
+                </div>
+                <button id="zudrehen-btn" class="action-btn">🔒 Zudrehen</button>
+            </div>
+
+            <div class="player-info human">
+                <h3>👤 Du</h3>
+                <div class="score-display">
+                    <span class="score" id="player-score">0</span>
+                    <span class="label">Punkte</span>
+                </div>
+                <div class="game-points">
+                    <span id="player-game-points">0</span> Spielpunkte
+                </div>
+            </div>
+        </div>
+
+        <!-- Spielfeld -->
+        <div class="game-board">
+            <!-- Computer Hand (verdeckt) -->
+            <div class="computer-hand" id="computer-hand">
+                <!-- Computerkarten werden hier eingefügt -->
+            </div>
+
+            <!-- Tisch (gespielte Karten) -->
+            <div class="table" id="table">
+                <div class="played-card-slot" id="first-card-slot"></div>
+                <div class="played-card-slot" id="second-card-slot"></div>
+            </div>
+
+            <!-- Spieler Hand -->
+            <div class="player-hand" id="player-hand">
+                <!-- Spielerkarten werden hier eingefügt -->
+            </div>
+        </div>
+
+        <!-- Nachrichten -->
+        <div class="message-area" id="message-area">
+            Willkommen beim Schnappsen! Klicke auf "Neues Spiel" zum Starten.
+        </div>
+
+        <!-- Kontrollen -->
+        <div class="controls">
+            <button id="new-game-btn" class="primary-btn">🎮 Neues Spiel</button>
+            <button id="rules-btn" class="secondary-btn">📖 Spielregeln</button>
+            <button id="melden-btn" class="action-btn" style="display:none;">💍 Hochzeit melden!</button>
+        </div>
+
+        <!-- Regeln Modal -->
+        <div id="rules-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Schnappsen Spielregeln</h2>
+                <div class="rules-content">
+                    <h3>🎯 Ziel des Spiels</h3>
+                    <p>Erreiche als Erster 66 Punkte oder gewinne den letzten Stich!</p>
+
+                    <h3>🃏 Kartenwerte</h3>
+                    <ul>
+                        <li><strong>Ass:</strong> 11 Punkte</li>
+                        <li><strong>Zehn:</strong> 10 Punkte</li>
+                        <li><strong>König:</strong> 4 Punkte</li>
+                        <li><strong>Dame:</strong> 3 Punkte</li>
+                        <li><strong>Bube:</strong> 2 Punkte</li>
+                    </ul>
+
+                    <h3>♠️ Spielablauf</h3>
+                    <p><strong>1.</strong> Jeder Spieler erhält 5 Karten</p>
+                    <p><strong>2.</strong> Eine Karte wird als Trumpf aufgedeckt</p>
+                    <p><strong>3.</strong> Der Nicht-Geber spielt die erste Karte aus</p>
+                    <p><strong>4.</strong> Solange der Talon offen ist, muss man nicht Farbe bedienen</p>
+                    <p><strong>5.</strong> Nach jedem Stich wird eine Karte nachgezogen</p>
+
+                    <h3>💍 Hochzeit (20/40 Punkte)</h3>
+                    <p>König und Dame derselben Farbe = 20 Punkte</p>
+                    <p>König und Dame in Trumpffarbe = 40 Punkte</p>
+                    <p>Melde die Hochzeit, wenn du am Zug bist!</p>
+
+                    <h3>🔒 Zudrehen</h3>
+                    <p>Du kannst den Talon schließen, wenn du am Zug bist. Danach muss Farbe bedient werden!</p>
+
+                    <h3>🏆 Punktevergabe</h3>
+                    <ul>
+                        <li>66+ Punkte, Gegner hat Stich: <strong>1 Spielpunkt</strong></li>
+                        <li>66+ Punkte, Gegner hat keinen Stich: <strong>2 Spielpunkte</strong></li>
+                        <li>Alle Stiche gewonnen: <strong>3 Spielpunkte</strong></li>
+                    </ul>
+
+                    <p class="tip">🎊 Wer zuerst 7 Spielpunkte erreicht, gewinnt!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 LeitnerLeitner Schnappsen App - Mit Liebe und einem Augenzwinkern entwickelt 😊</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

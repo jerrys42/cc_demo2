@@ -1,0 +1,544 @@
+/* LeitnerLeitner Schnappsen App - Stylesheet */
+
+/* Design Variablen */
+:root {
+    --primary-blue: #303AB2;
+    --accent-orange: #F08050;
+    --light-gray: #E3DFDA;
+    --medium-gray: #A5A5A5;
+    --white: #FFFFFF;
+    --card-red: #DC143C;
+    --card-black: #000000;
+    --success-green: #4CAF50;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Verdana, Arial, sans-serif;
+    background: linear-gradient(135deg, var(--primary-blue) 0%, #2029a0 100%);
+    color: var(--white);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+}
+
+.game-container {
+    flex: 1;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+    width: 100%;
+}
+
+/* Header */
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+}
+
+header h1 {
+    font-size: 32px;
+    font-weight: bold;
+    color: var(--accent-orange);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 16px;
+    color: var(--light-gray);
+    font-style: italic;
+}
+
+/* Spielinfo */
+.game-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 20px;
+}
+
+.player-info {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 15px 25px;
+    border-radius: 12px;
+    min-width: 200px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.player-info:hover {
+    transform: translateY(-5px);
+}
+
+.player-info h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: var(--accent-orange);
+}
+
+.score-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.score {
+    font-size: 42px;
+    font-weight: bold;
+    color: var(--white);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.label {
+    font-size: 14px;
+    color: var(--light-gray);
+}
+
+.game-points {
+    font-size: 14px;
+    color: var(--accent-orange);
+    font-weight: bold;
+    text-align: center;
+    margin-top: 5px;
+}
+
+/* Trumpf Info */
+.trump-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.talon-counter {
+    background: var(--accent-orange);
+    color: var(--white);
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: bold;
+    font-size: 18px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.trump-card {
+    background: var(--white);
+    width: 80px;
+    height: 120px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    border: 3px solid var(--accent-orange);
+    font-size: 24px;
+    font-weight: bold;
+    transform: rotate(-15deg);
+    transition: transform 0.3s ease;
+}
+
+.trump-card:hover {
+    transform: rotate(-15deg) scale(1.1);
+}
+
+.card-placeholder {
+    font-size: 14px;
+    color: var(--medium-gray);
+}
+
+/* Spielfeld */
+.game-board {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 20px;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Hände */
+.computer-hand,
+.player-hand {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    min-height: 140px;
+    align-items: center;
+}
+
+/* Karten */
+.card {
+    width: 90px;
+    height: 130px;
+    background: var(--white);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    position: relative;
+    border: 2px solid var(--light-gray);
+}
+
+.card:hover {
+    transform: translateY(-15px) scale(1.05);
+    box-shadow: 0 12px 24px rgba(240, 128, 80, 0.6);
+    border-color: var(--accent-orange);
+}
+
+.card.selected {
+    transform: translateY(-20px) scale(1.1);
+    border: 3px solid var(--accent-orange);
+    box-shadow: 0 0 20px var(--accent-orange);
+}
+
+.card.played {
+    animation: playCard 0.5s ease;
+}
+
+@keyframes playCard {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2) rotate(10deg); }
+    100% { transform: scale(1); }
+}
+
+.card-back {
+    background: linear-gradient(135deg, var(--primary-blue), var(--accent-orange));
+    color: var(--white);
+    font-size: 24px;
+}
+
+.card-suit {
+    font-size: 48px;
+    margin: 5px 0;
+}
+
+.card-rank {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.card.red {
+    color: var(--card-red);
+}
+
+.card.black {
+    color: var(--card-black);
+}
+
+/* Tisch */
+.table {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    min-height: 160px;
+    position: relative;
+}
+
+.played-card-slot {
+    width: 100px;
+    height: 140px;
+    border: 3px dashed rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.played-card-slot.active {
+    border-color: var(--accent-orange);
+    background: rgba(240, 128, 80, 0.1);
+    box-shadow: 0 0 20px rgba(240, 128, 80, 0.3);
+}
+
+/* Buttons */
+button {
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.primary-btn {
+    background: var(--accent-orange);
+    color: var(--white);
+}
+
+.primary-btn:hover {
+    background: #e06030;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+.secondary-btn {
+    background: var(--light-gray);
+    color: var(--primary-blue);
+}
+
+.secondary-btn:hover {
+    background: #d0ccc7;
+    transform: translateY(-2px);
+}
+
+.action-btn {
+    background: var(--primary-blue);
+    color: var(--white);
+}
+
+.action-btn:hover {
+    background: #252f9f;
+    transform: translateY(-2px);
+}
+
+.action-btn:disabled {
+    background: var(--medium-gray);
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* Nachrichten */
+.message-area {
+    background: rgba(240, 128, 80, 0.9);
+    padding: 15px 25px;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    animation: messageSlide 0.5s ease;
+}
+
+@keyframes messageSlide {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Kontrollen */
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-content {
+    background: var(--white);
+    color: var(--primary-blue);
+    margin: 5% auto;
+    padding: 30px;
+    border: 3px solid var(--accent-orange);
+    border-radius: 15px;
+    width: 90%;
+    max-width: 700px;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+    animation: slideDown 0.4s ease;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.close {
+    color: var(--medium-gray);
+    float: right;
+    font-size: 32px;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.close:hover {
+    color: var(--accent-orange);
+}
+
+.rules-content h2 {
+    color: var(--primary-blue);
+    font-size: 28px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.rules-content h3 {
+    color: var(--accent-orange);
+    font-size: 20px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.rules-content p,
+.rules-content ul {
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.rules-content ul {
+    list-style-position: inside;
+    padding-left: 20px;
+}
+
+.rules-content li {
+    margin-bottom: 8px;
+}
+
+.tip {
+    background: var(--light-gray);
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 4px solid var(--accent-orange);
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+/* Footer */
+footer {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 15px;
+    text-align: center;
+    font-size: 10px;
+    color: var(--medium-gray);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Spezialeffekte */
+.win-animation {
+    animation: celebration 1s ease;
+}
+
+@keyframes celebration {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    25% { transform: scale(1.2) rotate(-5deg); }
+    50% { transform: scale(1.3) rotate(5deg); }
+    75% { transform: scale(1.2) rotate(-5deg); }
+}
+
+.stich-won {
+    animation: stichWon 0.8s ease;
+}
+
+@keyframes stichWon {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.5) rotate(360deg); opacity: 0.8; }
+    100% { transform: scale(0); opacity: 0; }
+}
+
+/* Hochzeit Meldung */
+.marriage-indicator {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: gold;
+    color: var(--primary-blue);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 14px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    animation: bounce 0.6s ease;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-10px); }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .game-info {
+        flex-direction: column;
+    }
+
+    .player-info {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 24px;
+    }
+
+    .card {
+        width: 70px;
+        height: 100px;
+    }
+
+    .card-suit {
+        font-size: 36px;
+    }
+
+    .card-rank {
+        font-size: 18px;
+    }
+
+    .trump-card {
+        width: 60px;
+        height: 90px;
+    }
+}
